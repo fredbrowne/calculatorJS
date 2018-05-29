@@ -171,14 +171,22 @@ class CalcController {
     getLastItem(isOperator = true) {
 
         let lastItem;
-
-        for(let i = this._operation.length-1;i >= 0; i--) {
+        //Changed for method to for..of -- And it WORKS!
+        for (const op of this._operation) {
+            if (this.isOperator(op) == isOperator) {
+                lastItem = op;
+                break;
+            }
+          }
+        
+        /* OLD FOR method replaced with new FOr..OF
+         for(let i = this._operation.length-1;i >= 0; i--) {
 
             if (this.isOperator(this._operation[i]) == isOperator) {
                 lastItem = this._operation[i];
                 break;
             }
-        }
+        }*/
         if (!lastItem) {
             
             lastItem = (isOperator) ? this._lastOperator : this._lastNumber;
